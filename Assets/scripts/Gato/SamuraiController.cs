@@ -9,10 +9,10 @@ public class SamuraiController : MonoBehaviour {
     Rigidbody2D rb;
     public Animator anim;
 
-    bool grounded;
+    bool grounded, escalando;
     public Transform groundCheck;
-    float groundRadius = 1f;
-    public LayerMask whatIsGround;
+    public float radius = 1f;
+	public LayerMask whatIsGround, whatIsArrandor;
     public float jumpForce = 7000f;
     public float run = 2f;
     
@@ -25,7 +25,9 @@ public class SamuraiController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+        grounded = Physics2D.OverlapCircle(groundCheck.position, radius, whatIsGround);
+		escalando = Physics2D.OverlapCircle(groundCheck.position, radius, whatIsArrandor);
+		Debug.Log (grounded);
         anim.SetBool("ground", grounded);
         anim.SetFloat("vSpeed", rb.velocity.y);
 
@@ -47,7 +49,7 @@ public class SamuraiController : MonoBehaviour {
 
     void Update()
     {
-       if(grounded && Input.GetButtonDown("Jump"))
+		if((grounded || escalando) && Input.GetButtonDown("Jump"))
         {
             anim.SetBool("ground", false);
             rb.AddForce(new Vector2(0,jumpForce));
