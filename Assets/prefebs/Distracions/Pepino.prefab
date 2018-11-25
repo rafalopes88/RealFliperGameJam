@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50341797621578882}
   - component: {fileID: 61939106542992642}
   - component: {fileID: 114645121667568018}
+  - component: {fileID: 58832163403098640}
   m_Layer: 5
   m_Name: Pepino
   m_TagString: Untagged
@@ -50,6 +51,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &58832163403098640
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1207658443911622}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.24
 --- !u!61 &61939106542992642
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -148,6 +164,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 6.31}
+  m_AnchoredPosition: {x: 256.55, y: 323}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
