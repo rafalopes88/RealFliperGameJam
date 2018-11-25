@@ -23,10 +23,13 @@ public class GatoFantasmasController :MonoBehaviour{
 		if (Input.GetButtonDown ("Fire2") && novoNovelo == null) {
 			novoNovelo = Instantiate (noveloDeLa, transform.position, transform.rotation);
 		}
-		if (Input.GetButtonDown ("Fire3") && novaCaixa == null) {
-			novaCaixa = Instantiate (caixa, transform.position, transform.rotation);
-		}
+        if (Input.GetButtonDown("Fire3") && novaCaixa == null)
+        {
+            novaCaixa = Instantiate(caixa, transform.position, transform.rotation);
 
-		transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0) * Time.deltaTime * maxSpeed;
+        }
+
+
+            transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0) * Time.deltaTime * maxSpeed;
 	}
 }
