@@ -15,7 +15,9 @@ public class SamuraiController : MonoBehaviour {
 	public LayerMask whatIsGround, whatIsArrandor;
     public float jumpForce = 7000f;
     public float run = 2f;
-	public bool distracted;
+	public bool distracted, damaged;
+	public SpriteRenderer sprite;
+	public float carCrash = 10f;
     
 	public float targetPosition;
 
@@ -36,7 +38,7 @@ public class SamuraiController : MonoBehaviour {
 
         float move;
 
-		if (!distracted) {
+		if (!distracted && !damaged) {
 			move = Input.GetAxis ("Horizontal");
 			anim.SetFloat("speed", Mathf.Abs(move));
 			rb.velocity = new Vector2(move * maxSpeed, rb.velocity.y);
@@ -50,18 +52,44 @@ public class SamuraiController : MonoBehaviour {
 
     void Update()
     {
-		if((grounded || escalando) && Input.GetButtonDown("Jump") && !distracted)
+		if (damaged) {
+			sprite.enabled = !sprite.enabled;
+		} 
+		else {
+			sprite.enabled = true;
+		}
+
+		if((grounded || escalando) && Input.GetButtonDown("Jump") && !distracted && !damaged)
         {
             anim.SetBool("ground", false);
             rb.AddForce(new Vector2(0,jumpForce));
         }
+		if (escalando && !grounded && Input.GetButton ("Horizontal") && !distracted && !damaged) {
+			anim.SetBool ("escalando", true);
+		} else {
+			anim.SetBool ("escalando", false);
+		}
     }
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		distracted = true;
-		anim.SetBool("distracted", true );
-		StartCoroutine (SaiDoSusto());
+
+		if (!damaged && !distracted) {
+			if (col.gameObject.tag == "Pepino") {
+				distracted = true;
+				anim.SetBool ("distracted", true);
+				StartCoroutine (SaiDoSusto ());
+			} else if (col.gameObject.tag == "Pendulo") {
+				damaged = true;
+				anim.SetBool ("damaged", true);
+				StartCoroutine (SaiDoSusto ());
+			} else if (col.gameObject.tag == "Carro") {
+				damaged = true;
+				anim.SetBool ("damaged", true);
+				rb.AddForce (new Vector2 (carCrash / 2, carCrash));
+				StartCoroutine (SaiDoSusto ());
+			}
+		}
 	}
 
 	IEnumerator SaiDoSusto()
@@ -69,7 +97,9 @@ public class SamuraiController : MonoBehaviour {
 
 		yield return new WaitForSeconds(3);
 		distracted = false ;
+		damaged = false ;
 		anim.SetBool("distracted", false );
+		anim.SetBool("damaged", false );
 	}
 
     void Flip()
@@ -79,4 +109,6 @@ public class SamuraiController : MonoBehaviour {
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+
+
 }

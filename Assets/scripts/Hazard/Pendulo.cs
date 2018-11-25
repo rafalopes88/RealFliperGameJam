@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndGame : MonoBehaviour {
+public class Pendulo : Hazard {
 
+	public GameObject trava;
 	// Use this for initialization
 	void Start () {
 		
@@ -11,10 +12,10 @@ public class EndGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Debug.Log("Just End me please");
-            Application.Quit();
-        }
-    }
+		
+	}
+
+	public override void Activate(){
+		trava.SetActive (false);
+	}
 }
