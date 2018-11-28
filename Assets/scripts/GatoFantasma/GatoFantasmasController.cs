@@ -19,7 +19,7 @@ public class GatoFantasmasController :MonoBehaviour{
 		if (Input.GetButtonDown ("Fire1") && novoPepino == null) {
 			novoPepino = Instantiate (pepino, transform.position, transform.rotation);
 		}
-        int fx = transform.position.x+Input.GetAxis("HorizontalF"), fy = transform.position.y+Input.GetAxis("VerticalF");
+        float fx = transform.position.x+Input.GetAxis("HorizontalF"), fy = transform.position.y+Input.GetAxis("VerticalF");
 
             transform.position += new Vector3(Input.GetAxis("HorizontalF"), Input.GetAxis("VerticalF"),0) * Time.deltaTime * maxSpeed;
 	}

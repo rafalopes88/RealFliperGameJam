@@ -24,15 +24,15 @@ public class Arranhador : Hazard {
 
 		if (activated && interactable) {
 			float step = speed * Time.deltaTime;
-			if (transform.position.y > target1 && direction == 1) {
-				transform.position -= new Vector3 (0, step, 0);
-			} else if (transform.position.y < target2 && direction == 2) {
+			if (transform.position.y < target1 && direction == 1) {
 				transform.position += new Vector3 (0, step, 0);
+			} else if (transform.position.y > target2 && direction == 2) {
+				transform.position -= new Vector3 (0, step, 0);
 			}
 
-			if (direction == 1 && transform.position.y < target1)
+			if (direction == 1 && transform.position.y > target1)
 				direction = 2;
-			else if (direction == 2 && transform.position.y > target2)
+			else if (direction == 2 && transform.position.y < target2)
 				direction = 1;
 
 		}
@@ -40,7 +40,7 @@ public class Arranhador : Hazard {
 	}
 
 	public override void Activate(){
-        Debug.Log("oi");
+        
 		activated = true;
 	}
 }

@@ -64,7 +64,7 @@ public class SamuraiController : MonoBehaviour {
             anim.SetBool("ground", false);
             rb.AddForce(new Vector2(0,jumpForce));
         }
-		if (escalando && !grounded && Input.GetButton ("Horizontal") && !distracted && !damaged) {
+		if (escalando  && Input.GetButton ("Horizontal") && !distracted && !damaged) {
 			anim.SetBool ("escalando", true);
 		} else {
 			anim.SetBool ("escalando", false);
